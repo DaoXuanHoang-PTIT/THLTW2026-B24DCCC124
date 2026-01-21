@@ -1,4 +1,6 @@
-﻿export default [
+﻿import component from "@/locales/en-US/component";
+
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -41,6 +43,13 @@
 		name: 'TodoList',
 		icon: 'OrderedListOutlined',
 		component: './TodoList',
+	},
+
+	{
+		path: '/bt1',
+		name: 'baitap1',
+		component: './bt1',
+		icon: 'ArrowsAltOutlined',
 	},
 
 	// DANH MUC HE THONG
