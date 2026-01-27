@@ -1,7 +1,16 @@
 import button from '@/locales/vi-VN/global/button';
 import title from '@/locales/vi-VN/global/title';
 import type { IColumn } from '@/components/Table/typing';
-import { Table, Button, Popconfirm, message, Modal } from 'antd';
+import {
+  Table,
+  Button,
+  Popconfirm,
+  message,
+  Modal,
+  Form,
+  Input,
+  InputNumber,
+} from 'antd';
 import { useState } from 'react';
 
 interface sanPham {
@@ -21,30 +30,37 @@ const exmpl: sanPham[] = [
 
 function Bt1() {
   const [data, setData] = useState<sanPham[]>(exmpl);
+  const [searchText, setSearchText] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
 
   const handleDelete = (id: number) => {
     setData(data.filter(item => item.id !== id));
     message.success('Xóa sản phẩm thành công');
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOk = () => {
-    setIsModalOpen(false)
+  const handleAdd = (values: any) => {
+    const newProduct: sanPham = {
+      id: Date.now(),
+      ...values,
+    };
+    setData([...data, newProduct]);
+    message.success('Thêm sản phẩm thành công');
+    setIsModalOpen(false);
+    form.resetFields();
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false)
-  };
+  /* ===== Tìm kiếm ===== */
+  const filteredData = data.filter(item =>
+    item.name.toLowerCase().includes(searchText.toLowerCase()),
+  );
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
+  /* ===== Cột bảng ===== */
   const columns: IColumn<sanPham>[] = [
     {
       title: 'STT',
-      dataIndex:'id',
       align: 'center',
+      render: (_: any, __: sanPham, index: number) => index + 1,
     },
     {
       title: 'Tên sản phẩm',
@@ -55,6 +71,7 @@ function Bt1() {
       title: 'Giá',
       dataIndex: 'price',
       align: 'center',
+      render: (price: number) => price.toLocaleString('vi-VN') + ' đ',
     },
     {
       title: 'Số lượng',
@@ -67,7 +84,7 @@ function Bt1() {
       align: 'center',
       render: (record: sanPham) => (
         <Popconfirm
-          title="Xóa nhé?"
+          title="Bạn có chắc chắn muốn xóa?"
           onConfirm={() => handleDelete(record.id)}
         >
           <Button type="primary" danger>
@@ -80,27 +97,76 @@ function Bt1() {
 
   return (
     <div>
-    <Table
-      columns={columns}
-      dataSource={data}
-      rowKey="id"
-      pagination={false}
-    />
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
-      <Modal
-        title="Basic Modal"
-        closable={{ 'aria-label': 'Custom Close Button' }}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+      <h2>{title.product || 'Quản lý sản phẩm'}</h2>
+
+      {/* Tìm kiếm */}
+      <Input.Search
+        placeholder="Tìm kiếm theo tên sản phẩm"
+        style={{ width: 300, marginBottom: 16 }}
+        onChange={e => setSearchText(e.target.value)}
+      />
+
+      {/* Nút thêm */}
+      <Button
+        type="primary"
+        style={{ float: 'right', marginBottom: 16 }}
+        onClick={() => setIsModalOpen(true)}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        Thêm sản phẩm
+      </Button>
+
+      {/* Bảng */}
+      <Table
+        columns={columns}
+        dataSource={filteredData}
+        rowKey="id"
+        pagination={false}
+      />
+
+      {/* Modal thêm sản phẩm */}
+      <Modal
+        title="Thêm sản phẩm"
+        visible={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        onOk={() => form.submit()}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleAdd}
+        >
+          <Form.Item
+            label="Tên sản phẩm"
+            name="name"
+            rules={[{ required: true, message: 'Vui lòng nhập tên sản phẩm' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Giá"
+            name="price"
+            rules={[
+              { required: true, message: 'Vui lòng nhập giá' },
+              { type: 'number', min: 1, message: 'Giá phải là số dương' },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+
+          <Form.Item
+            label="Số lượng"
+            name="quantity"
+            rules={[
+              { required: true, message: 'Vui lòng nhập số lượng' },
+              { type: 'number', min: 1, message: 'Số lượng phải là số nguyên dương' },
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} />
+          </Form.Item>
+        </Form>
       </Modal>
-      </div>
+    </div>
   );
 }
 
