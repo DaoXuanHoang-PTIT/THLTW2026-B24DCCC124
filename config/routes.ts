@@ -49,7 +49,13 @@ export default [
 		path: '/bt1',
 		name: 'baitap1',
 		component: './bt1',
-		icon: 'ArrowsAltOutlined',
+		icon: 'PlusCircleOutlined',
+	},
+	{
+		path: '/bt2',
+		name: 'baitap2',
+		component: './bt2',
+		icon: 'PlusCircleOutlined',
 	},
 
 	// DANH MUC HE THONG
