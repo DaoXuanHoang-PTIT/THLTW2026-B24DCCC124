@@ -1,4 +1,6 @@
 ﻿import component from "@/locales/en-US/component";
+import Icon from "@ant-design/icons";
+import path from "path";
 
 export default [
 	{
@@ -55,6 +57,20 @@ export default [
 		path: '/bt2',
 		name: 'baitap2',
 		component: './bt2',
+		icon: 'PlusCircleOutlined',
+	},
+
+	{
+		path: '/th01-bt1',
+		name: 'TH01-BT1',
+		component: './th01-bt1',
+		icon: 'PlusCircleOutlined',
+	},
+
+	{
+		path: '/th01-bt2',
+		name: 'TH01-BT2',
+		component: './th01-bt2',
 		icon: 'PlusCircleOutlined',
 	},
 
