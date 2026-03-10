@@ -74,6 +74,20 @@ export default [
 		icon: 'PlusCircleOutlined',
 	},
 
+	{
+		path: '/th02-bt1',
+		name: 'TH02-BT1',
+		component: './th02-bt1',
+		icon: 'PlusCircleOutlined',
+	},
+
+	{
+		path: '/th02-bt2',
+		name: 'TH02-BT2',
+		component: './th02-bt2',
+		icon: 'PlusCircleOutlined',
+	},
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
