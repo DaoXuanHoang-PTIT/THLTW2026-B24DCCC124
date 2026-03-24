@@ -95,6 +95,13 @@ export default [
 		icon: 'PlusCircleOutlined',
 	},
 
+	{
+		path: '/th04',
+		name: 'TH04',
+		component: './th04',
+		icon: 'PlusCircleOutlined',
+	},
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
