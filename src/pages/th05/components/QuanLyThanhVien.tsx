@@ -16,7 +16,6 @@ const QuanLyThanhVien: React.FC<Props> = ({ applications, setApplications, clubs
 
     const getClubName = (id: string) => clubs.find(c => c.id === id)?.name || 'Unknown';
 
-    // Chỉ lấy những thành viên đã Approved
     const members = applications.filter(app => app.status === 'Approved' && (!filterClubId || app.clubId === filterClubId));
 
     const columns = [
