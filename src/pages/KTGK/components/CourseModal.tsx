@@ -11,7 +11,7 @@ interface ThuocTinhModalKhoaHoc {
     giaTriBanDau: KhoaHoc | null;
 }
 
-const ModalKhoaHoc: React.FC<ThuocTinhModalKhoaHoc> = ({ hienThi, khiHuy, khiDongY, giaTriBanDau }) => {
+const ModalKhoaHoc = ({ hienThi, khiHuy, khiDongY, giaTriBanDau }: ThuocTinhModalKhoaHoc) => {
     const [bieuMau] = Form.useForm();
 
     useEffect(() => {
