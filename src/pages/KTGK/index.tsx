@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, Button, Input, Select, Space, Popconfirm, message, Typography, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { PlusOutlined, } from '@ant-design/icons';
