@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Modal, Form, Input, Select, InputNumber } from 'antd';
 import { KhoaHoc, danhSachGiangVien } from '../index';
 

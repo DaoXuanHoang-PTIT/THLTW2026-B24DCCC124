@@ -123,6 +123,13 @@ export default [
 		icon: 'PlusCircleOutlined',
 	},
 
+	{
+		path: '/th07',
+		name: 'TH07',
+		component: './th07',
+		icon: 'PlusCircleOutlined',
+	},
+
 	// DANH MUC HE THONG
 	// {
 	// 	name: 'DanhMuc',
